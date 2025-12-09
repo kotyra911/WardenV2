@@ -23,7 +23,7 @@ def start_parse(driver, url:str):
 
             title = item.find_element(By.CSS_SELECTOR, "[itemprop='name']")
 
-            block_photo = driver.find_element(By.CSS_SELECTOR, ".photo-slider-list-item-r2YDC.photo-slider-dotsCounter-_n_4X")
+            block_photo = item.find_element(By.CSS_SELECTOR, ".photo-slider-list-item-r2YDC.photo-slider-dotsCounter-_n_4X")
 
             img = block_photo.find_element(By.TAG_NAME, "img")
 
