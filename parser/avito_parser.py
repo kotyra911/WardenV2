@@ -46,8 +46,6 @@ def start_parse(driver, url:str):
             print(title)
             print(photo_url)
 
-
-
     except Exception as e:
         logger.error(f"\nОшибка при попытке достать объявления со страницы: {e}")
 
