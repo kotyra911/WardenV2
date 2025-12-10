@@ -3,7 +3,7 @@ import time
 from selenium.common import NoSuchElementException
 from selenium.webdriver.common.by import By
 from bot.utils.logger import logger
-from bot.utils.formatting_data import formatting_data_for_message
+from bot.utils.data_worker import start_data_working
 
 
 def start_parse(driver, url:str):
@@ -43,12 +43,7 @@ def start_parse(driver, url:str):
             img = block_photo.find_element(By.TAG_NAME, "img")
             photo_url = img.get_attribute("src")
 
-            formatting_data_for_message(avito_url, price, title, photo_url)
-
-            print(avito_url)
-            print(price)
-            print(title)
-            print(photo_url)
+            start_data_working(avito_url, price, title, photo_url)
 
     except Exception as e:
         logger.error(f"\nОшибка при попытке достать объявления со страницы: {e}")
