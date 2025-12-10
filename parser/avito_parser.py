@@ -3,6 +3,8 @@ import time
 from selenium.common import NoSuchElementException
 from selenium.webdriver.common.by import By
 from bot.utils.logger import logger
+from bot.utils.formatting_data import formatting_data_for_message
+
 
 def start_parse(driver, url:str):
 
@@ -40,6 +42,8 @@ def start_parse(driver, url:str):
             block_photo = item.find_element(By.CSS_SELECTOR, ".photo-slider-list-item-r2YDC.photo-slider-dotsCounter-_n_4X")
             img = block_photo.find_element(By.TAG_NAME, "img")
             photo_url = img.get_attribute("src")
+
+            formatting_data_for_message(avito_url, price, title, photo_url)
 
             print(avito_url)
             print(price)
