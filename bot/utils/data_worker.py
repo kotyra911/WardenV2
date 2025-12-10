@@ -5,6 +5,7 @@ from aiogram.utils.markdown import hlink
 from bot.notifications import send_new_ad_to_user
 from bot.config import TG_ID
 from bot.main import bot
+import asyncio
 
 def start_data_working(avito_url: str, price: str, title: str, photo_url: str):
     logger.debug("Начал работу с данными")
@@ -32,5 +33,5 @@ def formatting_data_for_message(avito_url: str, price: str, title: str, photo_ur
         f'<a href="{avito_url}">Перейти</a>'
     )
 
-    send_new_ad_to_user(TG_ID, bot, message, photo_url)
+    asyncio.run(send_new_ad_to_user(TG_ID, bot, message, photo_url))
     return message, photo_url

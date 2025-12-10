@@ -1,6 +1,4 @@
 import time
-
-from selenium.common import NoSuchElementException
 from selenium.webdriver.common.by import By
 from bot.utils.logger import logger
 from bot.utils.data_worker import start_data_working
