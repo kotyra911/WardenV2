@@ -6,10 +6,14 @@ from bot.notifications import send_new_ad_to_user
 from bot.config import TG_ID
 from bot.main import bot
 import asyncio
+from asyncio import run_coroutine_threadsafe
+from services import loop_manager
+
 
 def start_data_working(avito_url: str, price: str, title: str, photo_url: str):
     logger.debug("Начал работу с данными")
-    combined_string = avito_url + price + title + photo_url
+    combined_string = price + title + photo_url
+
 
     logger.debug("Хэширую строку")
     hash_value = get_hash_value(combined_string)
@@ -32,6 +36,11 @@ def formatting_data_for_message(avito_url: str, price: str, title: str, photo_ur
         f"{title}\n\n"
         f'<a href="{avito_url}">Перейти</a>'
     )
+    # отправляем корутину в event loop главного потока
+    run_coroutine_threadsafe(
+        send_new_ad_to_user(TG_ID, bot, message, photo_url),
+        loop_manager.loop  # ← тут лежит loop
+    )
 
-    asyncio.run(send_new_ad_to_user(TG_ID, bot, message, photo_url))
+
     return message, photo_url

@@ -5,6 +5,7 @@ import asyncio
 from aiogram import Bot, Dispatcher
 from parser.selenium_driver import driver
 from config import AVITO_URL, BOT_TOKEN  # берём настройки из конфига
+from services import loop_manager
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -19,18 +20,20 @@ def run_parser_loop():
     while True:
         try:
             logger.info("Запускаем start_parse()")
-            start_parse(driver, AVITO_URL)
+            start_parse(driver, AVITO_URL)  # Основная цепочка парсинга
         except Exception as e:
             logger.error(f"Ошибка в парсере: {e}")
         logger.info("Пауза 30 секунд перед следующим запуском")
         time.sleep(30)
 
-async def main():
-    # запускаем парсер в отдельном потоке
-    threading.Thread(target=run_parser_loop, daemon=True).start()
+loop = None
 
-    # запускаем бота
+async def main():
+    loop_manager.loop = asyncio.get_running_loop()  # ← сохраняем loop, чтобы можно было запустить асинхронную функцию в синхронном потоке
+
+    threading.Thread(target=run_parser_loop, daemon=True).start()
     await dp.start_polling(bot)
 
 if __name__ == "__main__":
     asyncio.run(main())
+

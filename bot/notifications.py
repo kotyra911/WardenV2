@@ -1,5 +1,6 @@
 from aiogram import Router, types, Bot
 
+# Отправка сообщения пользователю
 async def send_new_ad_to_user(tg_id, bot: Bot, message, photo_url):
 
     await bot.send_photo(
