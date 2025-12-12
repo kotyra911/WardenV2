@@ -3,6 +3,12 @@ from selenium.webdriver.common.by import By
 from bot.utils.logger import logger
 from bot.utils.data_worker import start_data_working
 from bot.config import sellers_black_list
+from asyncio import run_coroutine_threadsafe
+from bot.notifications import send_log_to_admin
+from bot.main import bot
+from services import loop_manager
+
+
 
 
 def start_parse(driver, url:str):
@@ -12,8 +18,14 @@ def start_parse(driver, url:str):
     try:
         logger.info(f"Загружаю страницу...")
         driver.get(url)  # Загрузка страницы
+        time.sleep(5)  # Пауза, чтобы подгрузились картинки
     except Exception as e:
-        logger.error(f"\nПроизошла ошибка при загрузке страницы: {e}")
+        logger.error(f"ОШИБКА: {e}")
+
+        run_coroutine_threadsafe(
+            send_log_to_admin(bot),
+            loop_manager.loop  # ← тут лежит loop
+        )
 
     # Получение всех объявлений
     try:
@@ -42,25 +54,31 @@ def start_parse(driver, url:str):
             title = item.find_element(By.CSS_SELECTOR, "[itemprop='name']").text
 
             # Изъятие фотографии
-            block_photo = item.find_element(By.CSS_SELECTOR, ".photo-slider-list-item-r2YDC.photo-slider-dotsCounter-_n_4X")
+            block_photo = item.find_element(By.CSS_SELECTOR, "[class='photo-slider-list-R0jle']")
             img = block_photo.find_element(By.TAG_NAME, "img")
             photo_url = img.get_attribute("src")
 
-            seller_id = int(item.get_attribute("id"))
+            sid = str(item.get_attribute("data-item-id"))  # Достаем id продавца
+            seller_id = sid[0:4]  # Берем только статичную часть
 
+            # Проверяем, есть ли продавец в черном списке
             if seller_id in sellers_black_list:
-                pass
+                continue  # Если есть, переходим к следующему объявлению
             else:
+                print(seller_id)
 
                 # Отправка данных дальше по цепочке
                 start_data_working(avito_url, price, title, photo_url, seller_id)
 
 
-
-        driver.close()  # Закрытие браузера, чтобы не открывалось бесконечное количество окон
-
     except Exception as e:
-        logger.error(f"\nОшибка при попытке достать объявления со страницы: {e}")
+        logger.error(f"ОШИБКА: {e}")
+
+        run_coroutine_threadsafe(
+            send_log_to_admin(bot),
+            loop_manager.loop  # ← тут лежит loop
+        )
+
 
 
 

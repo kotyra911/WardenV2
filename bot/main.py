@@ -6,6 +6,10 @@ from aiogram import Bot, Dispatcher
 from parser.selenium_driver import driver
 from config import AVITO_URL, BOT_TOKEN  # берём настройки из конфига
 from services import loop_manager
+from asyncio import run_coroutine_threadsafe
+from bot.notifications import send_log_to_admin
+
+
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -21,8 +25,16 @@ def run_parser_loop():
         try:
             logger.info("Запускаем start_parse()")
             start_parse(driver, AVITO_URL)  # Основная цепочка парсинга
+
         except Exception as e:
-            logger.error(f"Ошибка в парсере: {e}")
+            logger.error(f"ОШИБКА: {e}")
+
+            run_coroutine_threadsafe(
+                send_log_to_admin(bot),
+                loop_manager.loop  # ← тут лежит loop
+            )
+
+
         logger.info("Пауза 30 секунд перед следующим запуском")
         time.sleep(30)
 

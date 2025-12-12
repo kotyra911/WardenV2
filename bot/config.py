@@ -10,9 +10,21 @@ BOT_TOKEN=os.getenv('BOT_TOKEN')
 CHROME_DRIVER_PATH=os.getenv('CHROME_DRIVER_PATH')
 
 
+DEBUG_LOG_PATH=os.getenv('DEBUG_LOG_PATH')
+
 tg_ids = {
     1:os.getenv('TG_ID'),
     2:os.getenv('TG_ID2')
 }
+sellers_black_list = (os.getenv('BL_ID1'),
+                      os.getenv('BL_ID2'),
+                      os.getenv('BL_ID3'),
+                      os.getenv('BL_ID4'),
+                      os.getenv('BL_ID5'),
+                      os.getenv('BL_ID6'),
+                      os.getenv('BL_ID7'),
+                      os.getenv('BL_ID8'),
+                      os.getenv('BL_ID9'),
+                      )
 
 TTL_SECONDS = 2*24*60*60  # TTL = 2 дня
