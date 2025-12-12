@@ -9,6 +9,10 @@ AVITO_URL="https://www.avito.ru/irkutsk/telefony/mobilnye_telefony/apple-ASgBAgI
 BOT_TOKEN=os.getenv('BOT_TOKEN')
 CHROME_DRIVER_PATH=os.getenv('CHROME_DRIVER_PATH')
 
-TG_ID=os.getenv('TG_ID')
+
+tg_ids = {
+    1:os.getenv('TG_ID'),
+    2:os.getenv('TG_ID2')
+}
 
 TTL_SECONDS = 2*24*60*60  # TTL = 2 дня

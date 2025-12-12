@@ -3,14 +3,14 @@ from bot.utils.security import get_hash_value
 from bot.utils.logger import logger
 from aiogram.utils.markdown import hlink
 from bot.notifications import send_new_ad_to_user
-from bot.config import TG_ID
+from bot.config import tg_ids
 from bot.main import bot
 import asyncio
 from asyncio import run_coroutine_threadsafe
 from services import loop_manager
 
 
-def start_data_working(avito_url: str, price: str, title: str, photo_url: str):
+def start_data_working(avito_url: str, price: str, title: str, photo_url: str, seller_id: int):
     logger.debug("Начал работу с данными")
     combined_string = price + title + photo_url
 
@@ -27,18 +27,20 @@ def start_data_working(avito_url: str, price: str, title: str, photo_url: str):
         logger.debug("Добавляю запись в базу")
         rds.set_new_key(hash_value)
         # Вызов функции, для подготовки данных к отправке
-        formatting_data_for_message(avito_url, price, title, photo_url)
+        formatting_data_for_message(avito_url, price, title, photo_url, seller_id)
 
 
-def formatting_data_for_message(avito_url: str, price: str, title: str, photo_url: str):
+def formatting_data_for_message(avito_url: str, price: str, title: str, photo_url: str, seller_id: int):
     message = (
         f"<b>{price}</b>\n"        # жирная цена
         f"{title}\n\n"
+        f'ID продавца: {seller_id}\n\n'
         f'<a href="{avito_url}">Перейти</a>'
+
     )
     # отправляем корутину в event loop главного потока
     run_coroutine_threadsafe(
-        send_new_ad_to_user(TG_ID, bot, message, photo_url),
+        send_new_ad_to_user(tg_ids, bot, message, photo_url),
         loop_manager.loop  # ← тут лежит loop
     )
 
