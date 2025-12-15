@@ -14,7 +14,8 @@ DEBUG_LOG_PATH=os.getenv('DEBUG_LOG_PATH')
 
 tg_ids = {
     1:os.getenv('TG_ID'),
-    2:os.getenv('TG_ID2')
+    2:os.getenv('TG_ID2'),
+    3:os.getenv('TG_ADMIN')
 }
 sellers_black_list = (os.getenv('BL_ID1'),
                       os.getenv('BL_ID2'),

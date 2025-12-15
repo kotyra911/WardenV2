@@ -5,6 +5,7 @@ from bot.config import DEBUG_LOG_PATH, tg_ids
 
 tg_id1 =tg_ids.get(1)
 tg_id2 = tg_ids.get(2)
+admin_id = tg_ids.get(3)
 
 # Отправка сообщения пользователю
 async def send_new_ad_to_user(bot: Bot, message, photo_url):
@@ -25,6 +26,6 @@ async def send_log_to_admin(bot: Bot):
     pass
   #  file = FSInputFile(DEBUG_LOG_PATH)
 
-  #  await bot.send_message(chat_id=tg_id1,text='Произошла ошибка в работе бота. Отправляю лог-файл...')
-   # await bot.send_document(chat_id=tg_id1,
+  #  await bot.send_message(chat_id=admin_id,text='Произошла ошибка в работе бота. Отправляю лог-файл...')
+   # await bot.send_document(chat_id=admin_id,
               #              document=file,)

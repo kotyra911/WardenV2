@@ -62,19 +62,36 @@ Redis используется как локальное хранилище об
 
 ---
 
+## ! ВАЖНО !
+
+  Если вы хотите, чтобы логи отправлялись вам в тг, то нужно сделать следующее:
+
+- В bot/notifications.py раскомментировать функцию send_log_to_admin
+- В bot/utils/logger.py раскомментировать "Ведение лог файла"
+- В .env указать TG_ADMIN
+
+  Можно также указать сколько угодно ID и отправлять объявление десятку людей.
+  Главное дублировать метод отправки сообщения через TelegramAPI
+
+---
+
 ## ▶️ Getting Started
 
 ```bash
     git clone https://github.com/kotyra911/WardenV2.git
     
+    скачайте драйвер Chrome
+    
     cd путь проекта
     
-    python -m venv venv
+    создайте .env на основе env
     
-    source venv/bin/activate  # Linux / macOS
+    python -m venv venv  # создаение виртуального окружения
     
-    venv\Scripts\Activate     # Windows
+    source venv/bin/activate  # Linux / macOS  # активация venv
     
-    pip install -r requirements.txt
+    venv\Scripts\Activate     # Windows  # активация venv
+    
+    pip install -r requirements.txt  # Установке
 
     запустить bot/main.py
