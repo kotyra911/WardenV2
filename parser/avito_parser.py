@@ -9,8 +9,6 @@ from bot.main import bot
 from services import loop_manager
 
 
-
-
 def start_parse(driver, url:str):
 
     # Загрузка страницы

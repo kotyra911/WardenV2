@@ -10,7 +10,6 @@ from asyncio import run_coroutine_threadsafe
 from bot.notifications import send_log_to_admin
 
 
-
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 

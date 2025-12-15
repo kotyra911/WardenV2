@@ -6,6 +6,7 @@ from bot.notifications import send_log_to_admin
 from bot.main import bot
 from bot.utils.logger import logger
 
+
 class RedisInteraction:
     # Функция для проверки, существует ли ключ
     @staticmethod

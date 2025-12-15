@@ -2,6 +2,7 @@
 from parser.selenium_driver import driver
 import time
 
+
 try:
     driver.get("google.com")
     print("Браузер открылся!")
