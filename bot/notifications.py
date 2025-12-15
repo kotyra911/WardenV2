@@ -22,8 +22,9 @@ async def send_new_ad_to_user(bot: Bot, message, photo_url):
 
 # Уведомления для админа. В случае ошибки, бот отправляет лог файл в телеграм админу
 async def send_log_to_admin(bot: Bot):
-    file = FSInputFile(DEBUG_LOG_PATH)
+    pass
+  #  file = FSInputFile(DEBUG_LOG_PATH)
 
-    await bot.send_message(chat_id=tg_id1,text='Произошла ошибка в работе бота. Отправляю лог-файл...')
-    await bot.send_document(chat_id=tg_id1,
-                            document=file,)
+  #  await bot.send_message(chat_id=tg_id1,text='Произошла ошибка в работе бота. Отправляю лог-файл...')
+   # await bot.send_document(chat_id=tg_id1,
+              #              document=file,)

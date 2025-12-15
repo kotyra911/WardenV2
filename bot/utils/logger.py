@@ -14,10 +14,10 @@ logger.add(
 )
 
 # Ведение лог файла
-logger.add(
+"""logger.add(
     "C:/MainProjects/WardenV2/data/debug.log",
     format="{time:YYYY-MM-DD HH:mm:ss} | {level} | {name}:{line} - {message}",
     level="DEBUG",
     rotation="10 MB",     # новый файл каждые 10MB
     compression="zip"     # старый лог архивируется
-)
+)"""

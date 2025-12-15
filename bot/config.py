@@ -25,6 +25,21 @@ sellers_black_list = (os.getenv('BL_ID1'),
                       os.getenv('BL_ID7'),
                       os.getenv('BL_ID8'),
                       os.getenv('BL_ID9'),
+                      os.getenv('BL_ID10'),
+                      os.getenv('BL_ID11'),
+                      os.getenv('BL_ID12'),
+                      os.getenv('BL_ID13'),
+                      os.getenv('BL_ID14'),
+                      os.getenv('BL_ID15'),
+                      os.getenv('BL_ID16'),
+                      os.getenv('BL_ID17'),
+                      os.getenv('BL_ID18'),
+                      os.getenv('BL_ID19'),
+                      os.getenv('BL_ID20'),
+                      os.getenv('BL_ID21'),
+                      os.getenv('BL_ID22'),
+                      os.getenv('BL_ID23'),
+
                       )
 
 TTL_SECONDS = 2*24*60*60  # TTL = 2 дня

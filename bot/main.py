@@ -18,6 +18,7 @@ logger = logging.getLogger(__name__)
 bot = Bot(token=BOT_TOKEN)
 dp = Dispatcher()
 
+
 # функция для запуска парсера в цикле
 def run_parser_loop():
     from parser.avito_parser import start_parse
@@ -35,8 +36,8 @@ def run_parser_loop():
             )
 
 
-        logger.info("Пауза 30 секунд перед следующим запуском")
-        time.sleep(30)
+        logger.info("Пауза 10 секунд перед следующим запуском")
+        time.sleep(10)
 
 loop = None
 
