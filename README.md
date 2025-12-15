@@ -91,6 +91,6 @@ Redis используется как локальное хранилище об
     
     venv\Scripts\Activate     # Windows  # активация venv
     
-    pip install -r requirements.txt  # Установке
+    pip install -r requirements.txt  # установка зависимостей
 
     запустить bot/main.py
